@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/layout_half_padding"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,42 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@sample/repositories.json/data/name" />
 
+           <com.google.android.material.textview.MaterialTextView
+               android:id="@+id/tv_repo_description"
+               android:layout_height="wrap_content"
+               android:layout_width="0dp"
+               android:layout_marginEnd="8dp"
+               android:textSize="16dp"
+               android:maxLines="2"
+               android:ellipsize="end"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="@id/tv_repo_name"
+               app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
+               tools:text="@sample/repositories.json/data/description" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_star"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textSize="16dp"
+            app:chipBackgroundColor="@color/white"
+            app:chipIcon="@drawable/ic_star"
+            app:chipIconTint="#FFC107"
+            app:layout_constraintStart_toStartOf="@id/tv_repo_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repo_description"
+            tools:text="@sample/repositories.json/data/stargazers_count" />
+
+         <com.google.android.material.textview.MaterialTextView
+             android:id="@+id/tv_repo_language"
+             android:layout_height="wrap_content"
+             android:layout_width="0dp"
+             android:textSize="16dp"
+             android:maxLines="2"
+             android:ellipsize="end"
+             app:layout_constraintEnd_toEndOf="@id/tv_repo_name"
+             app:layout_constraintTop_toTopOf="@id/chip_star"
+             tools:text="@sample/repositories.json/data/language" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </com.google.android.material.card.MaterialCardView>
+
