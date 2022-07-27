@@ -54,6 +54,7 @@ dependencies {
     //koin @see https://insert-koin.io/docs/quickstart/android/
     // Koin for Android
     implementation 'io.insert-koin:koin-android:3.2'
+    implementation 'com.google.android.datatransport:transport-runtime:3.0.1'
 
     // Koin Test
     testImplementation 'io.insert-koin:koin-test:3.2'
