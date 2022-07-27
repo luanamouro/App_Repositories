@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     app:cardUseCompatPadding="true"
     app:cardCornerRadius="@dimen/layout_half_padding"
     app:cardElevation="@dimen/layout_half_padding">
@@ -11,15 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_owner"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            
-    </androidx.constraintlayout.widget.ConstraintLayout> 
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars">
 
-       
+        </androidx.appcompat.widget.AppCompatImageView>
 
-    
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_repo_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/layout_half_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_owner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@sample/repositories.json/data/name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </com.google.android.material.card.MaterialCardView>
