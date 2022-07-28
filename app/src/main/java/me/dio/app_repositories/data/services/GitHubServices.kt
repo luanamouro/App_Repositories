@@ -1,5 +1,6 @@
 package me.dio.app_repositories.data.services
 
+import me.dio.app_repositories.data.model.Repos
 import retrofit2.http.GET
 import retrofit2.http.Path
 

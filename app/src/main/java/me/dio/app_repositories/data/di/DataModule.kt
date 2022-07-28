@@ -1,9 +1,9 @@
 package me.dio.app_repositories.data.di
 
-import android.media.CamcorderProfile.get
-import android.net.Network
 import android.util.Log
 import com.google.android.datatransport.runtime.dagger.Module
+import me.dio.app_repositories.data.repositories.RepoRepository
+import me.dio.app_repositories.data.repositories.RepoRepositoryImpl
 import me.dio.app_repositories.data.services.GitHubServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,13 +17,17 @@ object DataModule {
     private const val OK_HTTP = "OkHttp"
 
     fun load(){
-        loadKoinModules(networkModules())
+        loadKoinModules(networkModules() + repoRepositoriesModule())
 
     }
-    
+
+    private fun loadKoinModules(any: Any) {
+
+    }
+
     private fun networkModules(): Module {
         return module {
-            single {
+            single<Any> {
                 val interceptor = HttpLoggingInterceptor {
                     Log.e(OK_HTTP, it)
                 }
@@ -34,7 +38,7 @@ object DataModule {
                     .build()
             }
 
-            single {
+            single<Any> {
                 GsonConverterFactory.create(GsonBuilder().create())
             }
 
@@ -52,17 +56,22 @@ object DataModule {
 
     }
 
-    private fun single(function: () -> OkHttpClient) {
+    private fun <T> single(function: () -> RepoRepositoryImpl) {
 
     }
 
-    private fun (): Module {
+    private fun repoRepositoriesModule(): Module {
         return module {
-            single<RepoRepository> { RepoRepositoryImpl(get()) }
-        }
+            single<RepoRepository>{RepoRepositoryImpl(get())}
+        } as Module
     }
 
-    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): OkHttpClient {
+    private fun RepoRepositoryImpl(services: OkHttpClient): RepoRepositoryImpl {
+
+    }
+
+
+    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .client(client)
