@@ -55,6 +55,7 @@ dependencies {
     // Koin for Android
     implementation 'io.insert-koin:koin-android:3.2'
     implementation 'com.google.android.datatransport:transport-runtime:3.0.1'
+    implementation 'androidx.camera:camera-core:1.0.0'
 
     // Koin Test
     testImplementation 'io.insert-koin:koin-test:3.2'
