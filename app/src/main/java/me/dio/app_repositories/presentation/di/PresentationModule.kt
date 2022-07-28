@@ -3,6 +3,9 @@ package me.dio.app_repositories.presentation.di
 import com.google.android.datatransport.runtime.dagger.Module
 import me.dio.app_repositories.domain.ListUserRepositoriesUseCase
 import me.dio.app_repositories.presentation.MainViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
 
 object PresentationModule {
 
@@ -10,7 +13,7 @@ object PresentationModule {
         loadKoinModules(viewModelModule())
     }
 
-    private fun viewModelModule() = Module {
+    private fun viewModelModule(): org.koin.core.module.Module {
         return module {
             viewModel { MainViewModel(get()) }
         }

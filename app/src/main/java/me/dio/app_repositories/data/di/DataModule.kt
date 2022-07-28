@@ -58,7 +58,7 @@ object DataModule {
 
     }
 
-    private fun <T> single(function: () -> RepoRepositoryImpl) {
+    private fun <T> single(function: () -> GsonConverterFactory) {
 
     }
 
