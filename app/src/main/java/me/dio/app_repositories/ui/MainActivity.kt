@@ -18,7 +18,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
-
+    private val dialog by lazy { createProgressDialog() }
+    private fun createProgressDialog() {
+        TODO("Not yet implemented")
+    }
     private val adapter by lazy { RepoListAdapter() }
     private val viewModel by viewModel<MainViewModel>()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -34,11 +37,15 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         viewModel.repos.observe(this){
             when(it){
+                MainViewModel.State.Loading -> dialog.show()
                 is MainViewModel.State.Error -> {
-                }
-                MainViewModel.State.Loading -> {
+                    createDialog{
+                        setMessage(it.error.message)
+                    }.show()
+                    dialog.dismiss()
                 }
                 is MainViewModel.State.Success -> {
+                    dialog.dismiss()
                     adapter.submitList(it,list)
                 }
             }
