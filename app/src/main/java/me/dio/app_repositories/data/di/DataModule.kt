@@ -2,6 +2,7 @@ package me.dio.app_repositories.data.di
 
 import android.util.Log
 import com.google.android.datatransport.runtime.dagger.Module
+import com.google.gson.GsonBuilder
 import me.dio.app_repositories.data.repositories.RepoRepository
 import me.dio.app_repositories.data.repositories.RepoRepositoryImpl
 import me.dio.app_repositories.data.services.GitHubServices
@@ -10,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 
 
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 object DataModule {
@@ -38,7 +40,7 @@ object DataModule {
                     .build()
             }
 
-            single<Any> {
+            single {
                 GsonConverterFactory.create(GsonBuilder().create())
             }
 
