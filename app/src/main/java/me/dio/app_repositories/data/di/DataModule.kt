@@ -1,7 +1,10 @@
 package me.dio.app_repositories.data.di
 
+import android.media.CamcorderProfile.get
+import android.net.Network
 import android.util.Log
 import com.google.android.datatransport.runtime.dagger.Module
+import me.dio.app_repositories.data.services.GitHubServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -12,6 +15,11 @@ import retrofit2.Retrofit
 object DataModule {
 
     private const val OK_HTTP = "OkHttp"
+
+    fun load(){
+        loadKoinModules(networkModules())
+
+    }
     
     private fun networkModules(): Module {
         return module {
@@ -31,9 +39,13 @@ object DataModule {
             }
 
             single {
-                createService<GitHubService>(get(), get())
+                createService<GitHubServices>(get(), get())
             }
-        }
+        } as Module
+    }
+
+    private fun get(): OkHttpClient {
+        TODO("Not yet implemented")
     }
 
     private fun module(function: () -> Unit): Any {
@@ -50,7 +62,7 @@ object DataModule {
         }
     }
 
-    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
+    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): OkHttpClient {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .client(client)
